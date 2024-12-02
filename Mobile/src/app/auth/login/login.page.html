@@ -1,0 +1,78 @@
+<ion-content [fullscreen]="true">
+  <form #formLogin="ngForm" (ngSubmit)="logar()">
+    <div class="container">
+      <h1>Sportfy</h1>
+      <p>Acesse a sua conta.</p>
+      <ion-list lines="none">
+        <ion-item>
+          <div class="icon-align">
+            <lucide-angular
+              [img]="User"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--light-blue)'"
+            ></lucide-angular>
+            <ion-input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Usuário"
+              [(ngModel)]="login.username"
+              #username="ngModel"
+              required
+            ></ion-input>
+          </div>
+        </ion-item>
+        <div *ngIf="username.invalid && username.touched" class="error-message">
+          <p *ngIf="username.errors?.['required']">O usuário é obrigatório.</p>
+        </div>
+
+        <ion-item>
+          <div class="icon-align">
+            <lucide-angular
+              [img]="Lock"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--light-blue)'"
+            ></lucide-angular>
+            <ion-input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Senha"
+              [(ngModel)]="login.password"
+              #password="ngModel"
+              required
+            ></ion-input>
+          </div>
+        </ion-item>
+        <div *ngIf="password.invalid && password.touched" class="error-message">
+          <p *ngIf="password.errors?.['required']">A senha é obrigatória.</p>
+        </div>
+      </ion-list>
+
+      <ion-button
+        size="small"
+        expand="block"
+        type="submit"
+        class="icon-button"
+        [disabled]="!formLogin.valid"
+      >
+        <div class="text-container">Entrar</div>
+        <div class="icon-align">
+          <lucide-angular
+            [img]="LogIn"
+            class="btn-inscrever-se"
+            [size]="20"
+          ></lucide-angular>
+        </div>
+      </ion-button>
+
+      <p class="margin-bot">
+        Não tem uma conta? <a routerLink="/cadastro">Cadastre-se</a>
+      </p>
+
+      <p *ngIf="message" class="error-message">{{ message }}</p>
+    </div>
+  </form>
+</ion-content>

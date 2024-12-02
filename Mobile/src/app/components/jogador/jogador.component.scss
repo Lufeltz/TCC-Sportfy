@@ -1,0 +1,156 @@
+.jogadores-container {
+  padding: 16px;
+}
+
+ion-searchbar {
+  color: #7b7b7b;
+  --background: var(--background-dark);
+  margin-top: -1rem;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+.jogador {
+  background-color: var(--background-dark);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+  border-right: 2px solid var(--light-blue);
+  border-bottom: 2px solid var(--light-blue);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+.jogador-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.jogador-nome {
+  font-size: 16px;
+  color: var(--text-new-green);
+}
+
+.jogador-curso {
+  font-size: 14px;
+  color: var(--text-white);
+}
+
+.jogador-data {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.jogador-foto {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+@media (max-width: 375px) {
+  .jogador {
+    padding: 12px;
+  }
+
+  .jogador-nome {
+    font-size: 14px;
+  }
+
+  .jogador-curso {
+    font-size: 12px;
+  }
+
+  .jogador-data,
+  .jogador-foto {
+    font-size: 10px;
+  }
+}
+
+.username {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.curso {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.data {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.icon-align {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.icon-align lucide-angular {
+  margin-right: 5px;
+}
+
+.icon-align p {
+  margin: 0;
+  color: var(--text-white);
+  font-size: 1rem;
+}
+
+.icon-align .trophy {
+  color: var(--text-orange);
+}
+
+.icon-align .star {
+  color: var(--yellow-desc);
+}
+
+.icon-align .bike {
+  color: var(--purple-desc);
+}
+
+.icon-align .cap {
+  color: var(--text-pink);
+}
+
+.icon-button .text-container {
+  display: flex;
+  align-items: center;
+}
+
+.btn-inscrever-se {
+  margin-left: 5px;
+}
+
+.icon-align {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.icon-align lucide-angular {
+  margin-right: 5px;
+}
+
+.icon-align p {
+  margin: 0;
+  color: var(--text-white);
+  font-size: 1rem;
+}
+
+ion-button {
+  margin-top: 16px;
+  --background: var(--text-white);
+  --color: var(--background-dark);
+}

@@ -1,0 +1,123 @@
+ion-content {
+  --background: var(--background-light);
+}
+
+ion-list {
+  --background: var(--background-dark);
+  background: var(--background-dark);
+}
+
+ion-segment {
+  --background: white; /* Fundo branco */
+  --color: var(--light-blue); /* Cor da fonte */
+  text-transform: capitalize; /* Texto capitalizado */
+  font-size: 0.8rem; /* Tamanho da fonte reduzido */
+  border-radius: 15px;
+  margin-top: 3.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+ion-button {
+  text-transform: capitalize; /* Texto capitalizado */
+}
+
+ion-segment-button {
+  --color: var(--light-blue); /* Cor da fonte padrão */
+  --color-checked: var(--light-blue); /* Cor da fonte quando selecionado */
+  --background-checked: white; /* Fundo branco quando selecionado */
+  --color-focused: var(--light-blue); /* Cor da fonte quando focado */
+  --color-hover: var(--light-blue); /* Cor da fonte quando em hover */
+  --indicator-color: var(--light-blue); /* Cor do indicador */
+  text-transform: capitalize; /* Texto capitalizado */
+  font-size: 0.8rem; /* Tamanho da fonte reduzido */
+  height: 100%; /* Garante que o botão preencha a altura do segmento */
+  display: flex;
+  align-items: center; /* Alinha verticalmente */
+  justify-content: center; /* Alinha horizontalmente */
+  padding: 0; /* Remove padding padrão para centralizar o conteúdo */
+  color: var(--light-blue); /* Define a cor da fonte diretamente */
+  transition: color 0.3s ease, background-color 0.3s ease; /* Adiciona transição suave */
+}
+
+ion-segment-button::part(native) {
+  color: var(--light-blue); /* Define a cor da fonte para o elemento nativo */
+}
+
+
+
+:root {
+  // backgrounds
+  --background-light: #202024;
+  --background-dark: #121214;
+  --background-red: var(--light-red);
+  --background-hover: #2e2e2e;
+
+  // principais
+  // --light-red: #ef4444;
+  --light-red: #dc2626;
+  --light-blue: #3b82f6;
+  --dark-blue: #1d4ed8;
+
+  // icones
+  --blue-lock: #00b4d8;
+
+  // texto
+  --yellow-desc: #ffb703;
+  --purple-desc: #b666e7;
+  --text-light: #7b7b7b;
+  --text-green: var(--light-blue);
+  --text-white: var(--gray-50);
+  --text-new-green: #22c55e;
+  --text-orange: #f97316;
+  --text-pink: #ec4899;
+
+  // extra
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #030712;
+}
+
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";

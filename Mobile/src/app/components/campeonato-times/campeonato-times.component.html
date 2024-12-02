@@ -1,0 +1,155 @@
+<div
+  class="criar-post"
+  *ngIf="
+    campeonato?.limiteParticipantes !== 1 &&
+    campeonato?.situacaoCampeonato === 'EM_ABERTO'
+  "
+>
+  <ion-button size="small" (click)="abrirModalEditar()">
+    <div class="icon-align">
+      Criar Time
+      <lucide-angular
+        [img]="SquarePen"
+        class="btn-inscrever-se"
+        [size]="20"
+      ></lucide-angular></div
+  ></ion-button>
+</div>
+
+<div
+  class="criar-post"
+  *ngIf="
+    campeonato?.limiteParticipantes === 1 &&
+    !usuarioInscritoNoCampeonato &&
+    campeonato?.situacaoCampeonato === 'EM_ABERTO'
+  "
+>
+  <ion-button size="small" (click)="abrirModalEditar()">
+    <div class="icon-align">
+      Criar Time Individual
+      <lucide-angular
+        [img]="SquarePen"
+        class="btn-inscrever-se"
+        [size]="20"
+      ></lucide-angular></div
+  ></ion-button>
+</div>
+
+<h3>Limite de times: {{ times.length }} / {{ campeonato?.limiteTimes }}</h3>
+<div class="card-container">
+  <ul>
+    <li *ngFor="let time of times" class="card">
+      <div class="card-header">
+        <p class="time">{{ time.nome }}</p>
+        <div class="icon-align">
+          <lucide-angular
+            [img]="Users"
+            class="btn-inscrever-se"
+            [size]="20"
+            [color]="'var(--yellow-desc)'"
+            (click)="toggleMenu()"
+          ></lucide-angular>
+          <p>
+            Jogadores:
+            {{
+              jogadoresPorTime[time.idTime]
+                ? jogadoresPorTime[time.idTime].length
+                : 0
+            }}
+            /
+            {{ campeonato?.limiteParticipantes }}
+          </p>
+        </div>
+      </div>
+
+      <ion-accordion-group>
+        <ion-accordion>
+          <ion-item slot="header" lines="none">
+            <ion-label>Jogadores</ion-label>
+          </ion-item>
+          <div slot="content">
+            <ul>
+              <li *ngFor="let jogador of jogadoresPorTime[time.idTime]">
+                <div
+                  class="icon-align"
+                  (click)="navegarParaPerfil(jogador.username)"
+                >
+                  <div>
+                    <lucide-angular
+                      [img]="User"
+                      class="btn-inscrever-se"
+                      [size]="20"
+                      [color]="'var(--text-new-green)'"
+                    ></lucide-angular>
+                    <ion-label>{{ jogador.username }}</ion-label>
+                  </div>
+                  <lucide-angular
+                    [img]="ExternalLink"
+                    class="btn-inscrever-se"
+                    [size]="20"
+                    [color]="'var(--text-white)'"
+                  ></lucide-angular>
+                </div>
+              </li>
+            </ul>
+            <div
+              class="criar-post"
+              *ngIf="
+                (jogadoresPorTime[time.idTime]?.length || 0) <
+                  (campeonato?.limiteParticipantes || 0) &&
+                !usuarioInscritoNoCampeonato
+              "
+            >
+              <ion-button
+                size="small"
+                (click)="abrirModalInscrever(time)"
+                *ngIf="!usuarioInscritoNoCampeonato"
+              >
+                <div class="icon-align">
+                  Entrar no Time
+                  <lucide-angular
+                    [img]="ArrowUp"
+                    class="btn-inscrever-se"
+                    [size]="20"
+                  ></lucide-angular>
+                </div>
+              </ion-button>
+
+              <ion-button
+                size="small"
+                (click)="sairDoTime()"
+                *ngIf="usuarioInscritoNoCampeonato"
+              >
+                <div class="icon-align">
+                  Sair do Time
+                  <lucide-angular
+                    [img]="ArrowDown"
+                    class="btn-inscrever-se"
+                    [size]="20"
+                  ></lucide-angular>
+                </div>
+              </ion-button>
+            </div>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </li>
+  </ul>
+</div>
+
+<app-modal-criar-time
+  *ngIf="modalEditarVisivel"
+  [idCampeonato]="idCampeonato"
+  [campeonato]="campeonato"
+  (close)="fecharModal()"
+>
+</app-modal-criar-time>
+
+<app-modal-inscrever-se
+  *ngIf="modalEditarVisivelInscrever"
+  [idUsuario]="idUsuario"
+  [time]="time"
+  [campeonato]="campeonato"
+  (close)="fecharModalInscrever()"
+>
+</app-modal-inscrever-se>

@@ -1,0 +1,201 @@
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+}
+
+.icon-align p {
+  margin: 0;
+  color: var(--text-white);
+  font-size: 1rem;
+}
+
+p span {
+  color: var(--text-white);
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 8px;
+  border-right: 2px solid var(--yellow-desc);
+  border-bottom: 2px solid var(--yellow-desc);
+
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+  padding: 1.75rem;
+  background-color: var(--background-dark);
+}
+
+.card {
+  background-color: var(--background-dark);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-right: 2px solid var(--light-blue);
+  border-bottom: 2px solid var(--light-blue);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+  width: 100%;
+}
+
+h3 {
+  display: flex;
+  justify-content: center;
+  color: var(--text-new-green);
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+h4 {
+  color: var(--yellow-desc);
+}
+
+.time {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nome-time {
+  color: var(--text-light);
+  flex: 1;
+}
+
+.campeonatos-container {
+  padding: 16px;
+}
+
+.placar-input {
+  width: 50px;
+  text-align: center;
+
+  border-right: 2px solid var(--yellow-desc);
+  border-bottom: 2px solid var(--yellow-desc);
+  border-radius: 4px;
+  background-color: var(--background-dark);
+  padding: 4px;
+  margin-left: 8px;
+  z-index: 999;
+  outline: none;
+  color: var(--yellow-desc);
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+  width: 100%;
+}
+
+li {
+  color: var(--text-light);
+}
+
+.x-separator {
+  color: var(--text-light);
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.icon-align lucide-angular {
+  margin-right: 8px;
+}
+
+.icon-align {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  color: var(--background-dark);
+}
+
+.icon-align lucide-angular {
+  margin-right: 5px;
+  --color: var(--background-dark);
+}
+
+.icon-align p {
+  margin: 0;
+  color: var(--purple-desc);
+  font-size: 1rem;
+}
+
+.card-header .time {
+  color: var(--text-white);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.btn-inscrever-se {
+  margin-left: 5px;
+  --color: var(--background-dark);
+}
+
+.criar-post {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+ion-button {
+  margin-top: 1.5rem;
+}
+
+.card-container-vencedor {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border-radius: 8px;
+  border-right: 2px solid var(--text-new-green);
+  border-bottom: 2px solid var(--text-new-green);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+  background-color: var(--background-dark);
+  color: var(--text-new-green);
+}
+
+h4 {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+h5 {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--text-new-green);
+}
+
+h6 {
+  font-size: 1.5rem;
+}
+
+.icon-align h5 {
+  margin: 0;
+}
+
+h3 {
+  text-align: center;
+}
+
+li .icon-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+li .space {
+  margin-top: 2rem;
+}

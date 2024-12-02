@@ -1,0 +1,107 @@
+.container {
+  margin-top: 50px;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.star {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  transition: fill 0.3s;
+  color: gray;
+  z-index: 10;
+
+  &.active {
+    color: var(--yellow-desc);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-dark);
+  border-radius: 8px;
+  border-right: 2px solid var(--light-blue);
+  border-bottom: 2px solid var(--light-blue);
+  padding: 1rem;
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+  margin-top: 1rem;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+}
+
+h2,
+h3,
+p {
+  text-align: center;
+  margin: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.btn-center {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+// ion-button {
+//   width: 100%;
+// }
+
+.icon-align {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.icon-align lucide-angular {
+  margin-right: 5px;
+}
+
+.icon-align p {
+  margin: 0;
+  color: var(--text-white);
+  font-size: 1rem;
+}
+
+.icon-align .user {
+  color: var(--text-new-green);
+}
+
+.icon-align .modalidades {
+  color: var(--text-pink);
+}
+
+.icon-align .media {
+  color: var(--purple-desc);
+}
+
+.icon-align .avaliacoes {
+  color: var(--text-orange);
+}
+
+.icon-button .text-container {
+  display: flex;
+  align-items: center;
+}
+
+.btn-inscrever-se {
+  margin-left: 5px;
+}
+
+ion-button {
+  margin-top: 16px;
+  --background: var(--text-white);
+  --color: var(--background-dark);
+}

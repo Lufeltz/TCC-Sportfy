@@ -1,0 +1,142 @@
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--background-dark);
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1001;
+  border-right: 2px solid var(--yellow-desc);
+  border-bottom: 2px solid var(--yellow-desc);
+  color: var(--text-white);
+  width: 86%;
+  max-width: 800px;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+}
+
+h2 {
+  font-size: 20px;
+  color: var(--text-highlight);
+  text-align: center;
+}
+
+.curtidas-lista {
+  max-height: 175px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+li {
+  margin: 10px 0;
+  font-size: 16px;
+  color: var(--text-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-icon {
+  margin-right: 10px;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: var(--text-white);
+  color: var(--background-dark);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:hover {
+  background-color: var(--yellow-desc);
+}
+
+.button-icon {
+  margin-right: 8px;
+}
+
+.btn-inscrever-se {
+  margin-left: 5px;
+}
+
+.icon-button .text-container {
+  display: flex;
+  align-items: center;
+}
+
+.icon-align {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.icon-align lucide-angular {
+  margin-right: 5px;
+}
+
+.icon-align p {
+  margin: 0;
+  color: var(--text-white);
+  font-size: 1rem;
+}
+
+ion-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  margin-top: 20px;
+  --background: var(--text-white);
+  --color: var(--background-dark);
+}
+
+.title {
+  margin-bottom: 20px;
+  // margin-top: -5px;
+  margin-right: 10px;
+  // line-height: 1;
+}
+
+.title-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--yellow-desc);
+  margin-bottom: 20px;
+}

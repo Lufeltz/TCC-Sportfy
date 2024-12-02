@@ -1,0 +1,29 @@
+ion-tabs {
+  --background: #121214;
+}
+
+ion-tab-button {
+  color: #7b7b7b;
+  margin-top: 5px;
+}
+
+ion-tab-bar {
+  --background: #121214;
+  border-top: 1px solid var(--light-blue);
+}
+
+ion-tab-button.selected {
+  color: var(--light-blue);
+}
+
+ion-tab-button ion-icon:hover {
+  color: var(--light-blue);
+}
+
+ion-label {
+  font-size: 0.75rem;
+}
+
+.my-icon {
+  font-size: 0.5rem;
+}

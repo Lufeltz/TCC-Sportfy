@@ -1,0 +1,43 @@
+<ion-content class="ion-padding">
+  <app-menu-perfil
+    [title]="pageTitle"
+    [menu]="pageMenu"
+    [menuContentId]="pageContent"
+  ></app-menu-perfil>
+
+  <ion-segment [(ngModel)]="selectedSegment">
+    <ion-segment-button value="campeonatos">
+      <ion-label>Campeonatos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="posts">
+      <ion-label>Publicações</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="jogadores">
+      <ion-label>Jogadores</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="selectedSegment === 'campeonatos'">
+    <app-listagem-campeonatos></app-listagem-campeonatos>
+  </div>
+
+  <div *ngIf="selectedSegment === 'posts'">
+    <div class="criar-post">
+      <ion-button size="small" (click)="criarPost()">
+        <div class="icon-align">
+          <lucide-angular
+            [img]="Pencil"
+            class="btn-inscrever-se"
+            [size]="20"
+          ></lucide-angular
+          >Criar Publicação
+        </div></ion-button
+      >
+    </div>
+    <app-posts [searchedPosts]="searchTerm"></app-posts>
+  </div>
+
+  <div *ngIf="selectedSegment === 'jogadores'">
+    <app-jogador [searchedJogadores]="searchTerm"></app-jogador>
+  </div>
+</ion-content>

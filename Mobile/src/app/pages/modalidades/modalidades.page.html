@@ -1,0 +1,151 @@
+<ion-content class="ion-padding">
+  <app-menu-perfil
+    [title]="pageTitle"
+    [menu]="pageMenu"
+    [menuContentId]="pageContent"
+  ></app-menu-perfil>
+
+  <ion-segment
+    [(ngModel)]="selectedSegment"
+    (ngModelChange)="setSelectedSegment($event)"
+  >
+    <ion-segment-button value="inscrito">
+      <ion-label>Inscrito</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="nao-inscrito">
+      <ion-label>Não Inscrito</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Modalidades inscritas -->
+  <div *ngIf="selectedSegment === 'inscrito'">
+    <ul>
+      <li
+        *ngFor="let modalidade of modalidadesInscritas"
+        class="item-lista inscrito"
+      >
+        <h3>
+          <div>
+            <lucide-angular
+              [img]="Medal"
+              class="btn-inscrever-se"
+              [size]="20"
+            ></lucide-angular>
+            {{ modalidade.nome }}
+          </div>
+          <span class="jogador-data">
+            {{ modalidade.dataCriacao | date: 'dd/MM/yy' }}
+          </span>
+        </h3>
+        <div class="icon-align">
+          <lucide-angular
+            [img]="Notebook"
+            class="btn-inscrever-se"
+            [size]="20"
+            [color]="'var(--text-light)'"
+          ></lucide-angular>
+          <p>
+            <strong class="descricao">Descrição: </strong>{{
+            modalidade.descricao }}
+          </p>
+        </div>
+
+        <div class="icon-align"></div>
+        <div class="icon-align"></div>
+        <img
+          *ngIf="modalidade.foto"
+          [src]="modalidade.foto"
+          alt="{{ modalidade.nome }}"
+        />
+        <div class="button-group">
+          <ion-button
+            class="alerta-cancelar"
+            [id]="'alerta-cancelar-' + modalidade.nome"
+            size="small"
+            expand="block"
+          >
+            <lucide-angular
+              [img]="CircleX"
+              class="btn-inscrever-se"
+              [size]="20"
+            ></lucide-angular>
+            Remover Inscrição
+          </ion-button>
+        </div>
+        <ion-alert
+          [trigger]="'alerta-cancelar-' + modalidade.nome"
+          header="Cancelar inscrição?"
+          [subHeader]="'Modalidade: ' + modalidade.nome"
+          message="Ao cancelar sua inscrição você não receberá mais informações sobre essa modalidade no seu feed"
+          [buttons]="getCancelAlertButtons(modalidade.idModalidadeEsportiva)"
+          (didDismiss)="setResult($event)"
+        ></ion-alert>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Modalidades não inscritas -->
+  <div *ngIf="selectedSegment === 'nao-inscrito'">
+    <ul>
+      <li
+        *ngFor="let modalidade of modalidadesDiferentes"
+        class="item-lista item-lista-nao-inscrito"
+      >
+        <h3>
+          <div>
+            <lucide-angular
+              [img]="Medal"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--light-red)'"
+            ></lucide-angular>
+            {{ modalidade.nome }}
+          </div>
+          <span class="jogador-data">
+            {{ modalidade.dataCriacao | date: 'dd/MM/yy' }}
+          </span>
+        </h3>
+        <div class="icon-align">
+          <lucide-angular
+            [img]="Notebook"
+            class="btn-inscrever-se"
+            [size]="20"
+            [color]="'var(--text-light)'"
+          ></lucide-angular>
+          <p>
+            <strong class="descricao">Descrição: </strong>{{
+            modalidade.descricao }}
+          </p>
+        </div>
+        <div class="icon-align"></div>
+        <div class="icon-align"></div>
+        <img
+          *ngIf="modalidade.foto"
+          [src]="modalidade.foto"
+          alt="{{ modalidade.nome }}"
+        />
+        <ion-button
+          [id]="'alerta-inscrever-' + modalidade.nome"
+          class="alerta-inscrever"
+          size="small"
+          expand="block"
+        >
+          Inscrever-se
+          <lucide-angular
+            [img]="ExternalLink"
+            class="btn-inscrever-se"
+            [size]="20"
+          ></lucide-angular>
+        </ion-button>
+        <ion-alert
+          [trigger]="'alerta-inscrever-' + modalidade.nome"
+          header="Inscrever-se?"
+          [subHeader]="'Modalidade: ' + modalidade.nome"
+          message="Ao realizar a inscrição você passará a receber informações sobre essa modalidade no seu feed"
+          [buttons]="getAlertButtons(modalidade.idModalidadeEsportiva)"
+          (didDismiss)="setResult($event)"
+        ></ion-alert>
+      </li>
+    </ul>
+  </div>
+</ion-content>

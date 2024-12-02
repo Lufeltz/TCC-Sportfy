@@ -1,0 +1,38 @@
+<ul>
+  <li *ngFor="let canal of contatosSaude" class="item-lista">
+    <h3>{{ canal.nome }}</h3>
+    <div class="icon-align">
+      <lucide-angular
+        [img]="Stethoscope"
+        class="btn-inscrever-se"
+        [size]="20"
+        color="var(--text-new-green)"
+      ></lucide-angular>
+      <p>
+        {{ canal.descricao }}
+      </p>
+    </div>
+    <div class="icon-align">
+      <lucide-angular
+        [img]="AtSign"
+        class="btn-inscrever-se"
+        [size]="20"
+        color="var(--text-new-green)"
+      ></lucide-angular>
+      <p>
+        {{ canal.email }}
+      </p>
+    </div>
+    <div class="icon-align">
+      <lucide-angular
+        [img]="Phone"
+        class="btn-inscrever-se"
+        [size]="20"
+        color="var(--text-new-green)"
+      ></lucide-angular>
+      <p>
+        {{ canal.telefone | telefoneMask }}
+      </p>
+    </div>
+  </li>
+</ul>

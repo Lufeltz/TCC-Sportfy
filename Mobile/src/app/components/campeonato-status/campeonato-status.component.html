@@ -1,0 +1,305 @@
+<div class="campeonatos-container">
+  <h3 *ngIf="campeonato">{{ campeonato.titulo }}</h3>
+  <div class="icon-align">
+    <lucide-angular
+      [img]="Flag"
+      class="btn-inscrever-se"
+      [size]="20"
+      [color]="'var(--purple-desc)'"
+    ></lucide-angular>
+    <p *ngIf="campeonato">
+      <strong>Status: </strong>
+      <span>{{
+        formatarSituacaoCampeonato(campeonato.situacaoCampeonato)
+      }}</span>
+    </p>
+  </div>
+
+  <div class="icon-align">
+    <lucide-angular
+      [img]="Users"
+      class="btn-inscrever-se"
+      [size]="20"
+      [color]="'var(--purple-desc)'"
+    ></lucide-angular>
+    <p>
+      <strong>Total de Times: </strong>
+      <span>{{ times.length }} / {{ campeonato!.limiteTimes }}</span>
+    </p>
+  </div>
+
+  <div class="icon-align">
+    <lucide-angular
+      [img]="User"
+      class="btn-inscrever-se"
+      [size]="20"
+      [color]="'var(--purple-desc)'"
+    ></lucide-angular>
+    <p *ngIf="campeonato && times">
+      <strong>Total de Participantes: </strong>
+      <span
+        >{{ size }} /
+        {{
+          (campeonato.limiteParticipantes || 0) * (campeonato.limiteTimes || 0)
+        }}
+      </span>
+    </p>
+  </div>
+
+  <ion-button
+    *ngIf="
+      !isCampeonatoIniciado &&
+      campeonato?.usernameCriador === usuarioLogado?.username
+    "
+    size="small"
+    id="open-toast-iniciar"
+    (click)="iniciarPrimeiraFase()"
+  >
+    <div class="icon-align">
+      Iniciar Campeonato
+      <lucide-angular
+        [img]="SquarePen"
+        class="btn-inscrever-se"
+        [size]="20"
+      ></lucide-angular>
+    </div>
+  </ion-button>
+  <ion-toast
+    position="bottom"
+    trigger="open-toast-iniciar"
+    message="Primeira fase iniciada!"
+    [duration]="2000"
+  ></ion-toast>
+
+  <div
+    class="criar-post"
+    *ngIf="
+      isCampeonatoIniciado &&
+      campeonato?.situacaoCampeonato !== 'FINALIZADO' &&
+      campeonato?.usernameCriador === usuarioLogado?.username
+    "
+  >
+    <ion-button size="small" id="open-toast-avancar" (click)="avancarFase()">
+      <div class="icon-align">
+        Avançar Fase
+        <lucide-angular
+          [img]="SquarePen"
+          class="btn-inscrever-se"
+          [size]="20"
+        ></lucide-angular>
+      </div>
+    </ion-button>
+  </div>
+
+  <ion-toast
+    position="bottom"
+    trigger="open-toast-iniciar"
+    message="Primeira fase avançada!"
+    [duration]="2000"
+  ></ion-toast>
+
+  <ul>
+    <li *ngIf="shouldShowEtapa('OITAVAS')">
+      <h4>Oitavas</h4>
+      <div *ngFor="let partida of getEtapa('OITAVAS')" class="card-container">
+        <div class="card">
+          <div class="time">
+            <div class="nome-time">{{ mapaTimes.get(partida.idTime1) }}</div>
+            <input
+              class="placar-input"
+              type="number"
+              min="0"
+              maxlength="3"
+              [(ngModel)]="partida.resultado!.pontuacaoTime1"
+              (input)="validateInput($event)"
+            />
+          </div>
+        </div>
+
+        <div class="x-separator">X</div>
+
+        <div class="card">
+          <div class="time">
+            <div class="nome-time">{{ mapaTimes.get(partida.idTime2) }}</div>
+            <input
+              class="placar-input"
+              type="number"
+              min="0"
+              maxlength="3"
+              [(ngModel)]="partida.resultado!.pontuacaoTime2"
+              (input)="validateInput($event)"
+            />
+          </div>
+        </div>
+
+        <div class="salvar-button">
+          <ion-button
+            id="open-toast-salvar"
+            size="small"
+            (click)="salvarResultado(partida)"
+          >
+            Salvar Resultado
+          </ion-button>
+        </div>
+
+        <ion-toast
+          trigger="open-toast-salvar"
+          message="Placar salvo com sucesso!"
+          [duration]="2000"
+        ></ion-toast>
+      </div>
+    </li>
+
+    <li *ngIf="shouldShowEtapa('QUARTAS')">
+      <h4>Quartas</h4>
+      <div *ngFor="let partida of getEtapa('QUARTAS')" class="card-container">
+        <div class="card">
+          <div class="time">
+            <div class="nome-time">{{ mapaTimes.get(partida.idTime1) }}</div>
+            <input
+              class="placar-input"
+              type="number"
+              min="0"
+              maxlength="3"
+              [(ngModel)]="partida.resultado!.pontuacaoTime1"
+              (input)="validateInput($event)"
+            />
+          </div>
+        </div>
+
+        <div class="x-separator">X</div>
+
+        <div class="card">
+          <div class="time">
+            <div class="nome-time">{{ mapaTimes.get(partida.idTime2) }}</div>
+            <input
+              class="placar-input"
+              type="number"
+              min="0"
+              maxlength="3"
+              [(ngModel)]="partida.resultado!.pontuacaoTime2"
+              (input)="validateInput($event)"
+            />
+          </div>
+        </div>
+
+        <ion-button size="small" (click)="salvarResultado(partida)">
+          <div class="icon-align">
+            Salvar
+            <lucide-angular
+              [img]="SquarePen"
+              class="btn-inscrever-se"
+              [size]="20"
+            ></lucide-angular>
+          </div>
+        </ion-button>
+      </div>
+    </li>
+
+    <li *ngIf="shouldShowEtapa('SEMI')">
+      <h4>Semi Final</h4>
+      <div *ngFor="let partida of getEtapa('SEMI')" class="card-container">
+        <div class="card">
+          <div class="time">
+            <div class="nome-time">{{ mapaTimes.get(partida.idTime1) }}</div>
+            <input
+              class="placar-input"
+              type="number"
+              min="0"
+              maxlength="3"
+              [(ngModel)]="partida.resultado!.pontuacaoTime1"
+              (input)="validateInput($event)"
+            />
+          </div>
+        </div>
+
+        <div class="x-separator">X</div>
+
+        <div class="card">
+          <div class="time">
+            <div class="nome-time">{{ mapaTimes.get(partida.idTime2) }}</div>
+            <input
+              class="placar-input"
+              type="number"
+              min="0"
+              maxlength="3"
+              [(ngModel)]="partida.resultado!.pontuacaoTime2"
+              (input)="validateInput($event)"
+            />
+          </div>
+        </div>
+
+        <ion-button size="small" (click)="salvarResultado(partida)">
+          <div class="icon-align">
+            Salvar
+            <lucide-angular
+              [img]="SquarePen"
+              class="btn-inscrever-se"
+              [size]="20"
+            ></lucide-angular>
+          </div>
+        </ion-button>
+      </div>
+    </li>
+
+    <li *ngIf="shouldShowEtapa('FINAL')">
+      <h4>Final</h4>
+      <div *ngFor="let partida of getEtapa('FINAL')" class="card-container">
+        <div class="card">
+          <div class="time">
+            <div class="nome-time">{{ mapaTimes.get(partida.idTime1) }}</div>
+            <input
+              class="placar-input"
+              type="number"
+              min="0"
+              maxlength="3"
+              [(ngModel)]="partida.resultado!.pontuacaoTime1"
+              (input)="validateInput($event)"
+            />
+          </div>
+        </div>
+
+        <div class="x-separator">X</div>
+
+        <div class="card">
+          <div class="time">
+            <div class="nome-time">{{ mapaTimes.get(partida.idTime2) }}</div>
+            <input
+              class="placar-input"
+              type="number"
+              min="0"
+              maxlength="3"
+              [(ngModel)]="partida.resultado!.pontuacaoTime2"
+              (input)="validateInput($event)"
+            />
+          </div>
+        </div>
+
+        <ion-button size="small" (click)="salvarResultado(partida)">
+          <div class="icon-align">
+            Salvar
+            <lucide-angular
+              [img]="SquarePen"
+              class="btn-inscrever-se"
+              [size]="20"
+            ></lucide-angular>
+          </div>
+        </ion-button>
+      </div>
+    </li>
+    <li *ngIf="hasVencedor()">
+      <div class="icon-align space">
+        <lucide-angular
+          [img]="Crown"
+          class="btn-inscrever-se"
+          [size]="20"
+          [color]="'var(--text-new-green)'"
+        ></lucide-angular>
+        <h5>Vencedor</h5>
+      </div>
+      <div class="card-container-vencedor">
+        <h6>{{ vencedorNome }}</h6>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,110 @@
+<ion-content class="ion-padding" [fullscreen]="true">
+  <app-menu-perfil
+    [title]="pageTitle"
+    [menu]="pageMenu"
+    [menuContentId]="pageContent"
+  ></app-menu-perfil>
+
+  <div class="post-container">
+    <div class="margin-tab">
+      <div class="icon-align">
+        <lucide-angular
+          [img]="NotebookPen"
+          class="btn-inscrever-se"
+          [size]="20"
+          [color]="'var(--yellow-desc)'"
+        ></lucide-angular>
+        <ion-label>Título</ion-label>
+      </div>
+
+      <ion-textarea
+        class="input-space styled-textarea titulo-input"
+        placeholder="Exemplo: Campeonato de Futebol (máx 50 caracteres)"
+        maxlength="50"
+        [(ngModel)]="publicacao.titulo"
+        name="titulo"
+        required
+        #titulo="ngModel"
+      ></ion-textarea>
+      <div *ngIf="titulo.invalid && titulo.touched" class="error-message">
+        <p *ngIf="titulo.errors?.['required']">O título é obrigatório.</p>
+      </div>
+
+      <div class="icon-align">
+        <lucide-angular
+          [img]="MessageCircleQuestion"
+          class="btn-inscrever-se"
+          [size]="20"
+          [color]="'var(--yellow-desc)'"
+        ></lucide-angular>
+        <ion-label>Mensagem</ion-label>
+      </div>
+
+      <ion-textarea
+        class="input-space styled-textarea message-input"
+        placeholder="Exemplo: Levar chuteira e caneleira (máx 150 caracteres)"
+        maxlength="150"
+        [(ngModel)]="publicacao.descricao"
+        name="descricao"
+        required
+        #descricao="ngModel"
+      ></ion-textarea>
+      <div *ngIf="descricao.invalid && descricao.touched" class="error-message">
+        <p *ngIf="descricao.errors?.['required']">A mensagem é obrigatória.</p>
+      </div>
+
+      <div class="icon-align">
+        <lucide-angular
+          [img]="MessageCircleQuestion"
+          class="btn-inscrever-se"
+          [size]="20"
+          [color]="'var(--yellow-desc)'"
+        ></lucide-angular>
+        <ion-label>Modalidade Esportiva</ion-label>
+      </div>
+
+      <div class="space-select">
+        <div class="custom-select-wrapper">
+          <select
+            class="custom-select"
+            id="modalidade-select"
+            [(ngModel)]="publicacao.idModalidadeEsportiva"
+            name="modalidadeEsportiva"
+            required
+            #modalidadeEsportiva="ngModel"
+          >
+            <option [ngValue]="null" selected>Sem Modalidade</option>
+            <option [ngValue]="1">Futebol</option>
+            <option [ngValue]="2">Vôlei</option>
+            <option [ngValue]="3">Basquete</option>
+            <option [ngValue]="4">Tênis de Mesa</option>
+          </select>
+        </div>
+      </div>
+
+      <ion-button
+        id="open-toast"
+        size="small"
+        expand="block"
+        class="icon-button"
+        (click)="onSubmit()"
+        [disabled]="!titulo.valid || !descricao.valid"
+      >
+        <div class="text-container">Criar Publicação</div>
+        <div class="icon-align">
+          <lucide-angular
+            [img]="ArrowRight"
+            class="btn-inscrever-se"
+            [size]="20"
+          ></lucide-angular>
+        </div>
+      </ion-button>
+
+      <ion-toast
+        trigger="open-toast"
+        message="Post criado com sucesso!"
+        [duration]="3000"
+      ></ion-toast>
+    </div>
+  </div>
+</ion-content>

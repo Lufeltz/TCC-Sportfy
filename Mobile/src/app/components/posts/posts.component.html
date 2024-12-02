@@ -1,0 +1,257 @@
+<div class="publicacoes-container">
+  <ion-searchbar
+    animated="true"
+    placeholder="Procurar"
+    [(ngModel)]="searchedCampeonatos"
+    (ionInput)="onSearchInput($event)"
+  >
+  </ion-searchbar>
+  <ul>
+    <li *ngFor="let publicacao of filteredPublications" class="publicacao">
+      <div class="publicacao-header">
+        <div class="username icon-align">
+          <lucide-angular
+            [img]="UserRound"
+            class="btn-inscrever-se"
+            [size]="20"
+            color="var(--text-new-green)"
+          ></lucide-angular>
+          <p class="usuario-username">{{ publicacao.Usuario.username }}</p>
+        </div>
+
+        <div class="username icon-align">
+          <p class="data">
+            {{ publicacao.dataPublicacao | date : "dd/MM/yy, HH:mm" }}
+          </p>
+
+          <lucide-angular
+            *ngIf="usuarioLogado!.username === publicacao.Usuario.username"
+            [img]="EllipsisVertical"
+            class="btn-inscrever-se"
+            [size]="20"
+            color="var(--text-new-green)"
+            (click)="toggleMenuPublicacao(publicacao.idPublicacao)"
+          ></lucide-angular>
+
+          <!-- Menu suspenso -->
+          <div
+            [class.show]="menuVisibilityPublicacao[publicacao.idPublicacao]"
+            class="dropdown-menu"
+          >
+            <ul>
+              <li (click)="editarPublicacao(publicacao.idPublicacao)">
+                Editar Publicação
+              </li>
+              <li (click)="deletarPublicacao(publicacao.idPublicacao)">
+                Deletar Publicação
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="publicacao-usuario">
+        <p class="comentarios-header">{{ publicacao.titulo }}</p>
+        <p class="descricao">{{ publicacao.descricao }}</p>
+        <div class="curtidas">
+          <div class="curtidas-info">
+            <div class="icon-align">
+              <lucide-angular
+                [img]="Star"
+                class="btn-inscrever-se"
+                [size]="20"
+                [color]="publicacao.isCurtiu ? 'var(--yellow-desc)' : 'gray'"
+                (click)="curtir(publicacao)"
+              ></lucide-angular>
+            </div>
+            <span
+              [ngClass]="{
+                'text-gray': !publicacao.isCurtiu,
+                'yellow-desc': publicacao.isCurtiu
+              }"
+              class="link-curtidas"
+              (click)="abrirModalCurtidas(publicacao.listaUsuarioCurtida)"
+              style="cursor: pointer"
+            >
+              {{ publicacao.listaUsuarioCurtida.length }} Curtidas
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="publicacao-interacoes">
+        <ion-accordion-group>
+          <ion-accordion>
+            <ion-item slot="header" class="comentarios-header">
+              <ion-label><strong>Comentários</strong></ion-label>
+            </ion-item>
+            <div slot="content">
+              <ul>
+                <li
+                  class="li-comentarios"
+                  *ngFor="let comentario of publicacao.listaComentario"
+                >
+                  <div class="comentario-header">
+                    <div class="username icon-align">
+                      <lucide-angular
+                        [img]="UserRound"
+                        class="btn-inscrever-se"
+                        [size]="20"
+                        color="var(--text-new-green)"
+                      ></lucide-angular>
+                      <p class="usuario-username">
+                        {{ comentario.Usuario.username }}
+                      </p>
+                    </div>
+
+                    <div class="username icon-align">
+                      <p class="comentario-data">
+                        {{
+                          comentario.dataComentario | date : "dd/MM/yy, HH:mm"
+                        }}
+                      </p>
+                      <lucide-angular
+                        *ngIf="
+                          usuarioLogado!.username ===
+                          comentario.Usuario.username
+                        "
+                        [img]="EllipsisVertical"
+                        class="btn-inscrever-se"
+                        [size]="20"
+                        color="var(--yellow-desc)"
+                        (click)="toggleMenuComentario(comentario.idComentario)"
+                      ></lucide-angular>
+                      <div
+                        [class.show]="
+                          menuVisibilityComentario[comentario.idComentario]
+                        "
+                        class="dropdown-menu"
+                      >
+                        <ul>
+                          <li
+                            (click)="editarComentario(comentario.idComentario)"
+                          >
+                            Editar Comentário
+                          </li>
+                          <li
+                            (click)="deletarComentario(comentario.idComentario)"
+                          >
+                            Deletar Comentário
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="comentario-descricao">{{ comentario.descricao }}</p>
+
+                  <!-- Comentário -->
+                  <div class="comentario-curtidas">
+                    <div
+                      class="curtidas-info"
+                      (click)="curtirComentario(comentario, publicacao)"
+                    >
+                      <div class="icon-align">
+                        <lucide-angular
+                          [img]="Star"
+                          class="btn-inscrever-se"
+                          [size]="20"
+                          [color]="
+                            comentario.isCurtiu ? 'var(--yellow-desc)' : 'gray'
+                          "
+                        ></lucide-angular>
+                      </div>
+                      <span
+                        [ngClass]="{
+                          'text-gray': !comentario.isCurtiu,
+                          'yellow-desc': comentario.isCurtiu
+                        }"
+                        (click)="
+                          abrirModalCurtidas(comentario.listaUsuarioCurtida);
+                          $event.stopPropagation()
+                        "
+                        style="cursor: pointer"
+                      >
+                        {{ comentario.listaUsuarioCurtida.length }} Curtidas
+                      </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="comentario-card">
+                <p>Faça seu comentário</p>
+                <textarea
+                  class="comentario-input styled-textarea"
+                  [(ngModel)]="novoComentario[publicacao.idPublicacao]"
+                  label="Comentário"
+                  labelPlacement="floating"
+                  placeholder="máx 150 caracteres"
+                  maxlength="150"
+                ></textarea>
+
+                <ion-button
+                  id="open-toast2"
+                  size="small"
+                  expand="block"
+                  class="comentar-button no-padding-button"
+                  (click)="comentar(publicacao)"
+                >
+                  <div class="text-container">Comentar</div>
+                  <div class="icon-align">
+                    <lucide-angular
+                      [img]="MessageCircleMore"
+                      class="btn-inscrever-se"
+                      [size]="20"
+                    ></lucide-angular>
+                  </div>
+                </ion-button>
+              </div>
+
+              <ion-toast
+                trigger="open-toast2"
+                message="Comentários criado com sucesso!"
+                [duration]="3000"
+              ></ion-toast>
+
+              <ion-button
+                size="small"
+                expand="block"
+                class="icon-button"
+                (click)="listarMaisComentarios(publicacao)"
+              >
+                <div class="text-container">Mais Comentários</div>
+                <div class="icon-align">
+                  <lucide-angular
+                    [img]="ArrowDownToDot"
+                    class="btn-inscrever-se"
+                    [size]="20"
+                  ></lucide-angular>
+                </div>
+              </ion-button>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </div>
+    </li>
+  </ul>
+  <ion-button
+    size="small"
+    expand="block"
+    class="icon-button"
+    (click)="listarMaisPosts()"
+  >
+    <div class="text-container">Mais Publicações</div>
+    <div class="icon-align">
+      <lucide-angular
+        [img]="ArrowDownToDot"
+        class="btn-inscrever-se"
+        [size]="20"
+      ></lucide-angular>
+    </div>
+  </ion-button>
+</div>
+
+<app-modal-curtidas
+  *ngIf="modalCurtidasVisible"
+  [listaUsuarioCurtida]="curtidasParaExibir"
+  (close)="closeModal()"
+></app-modal-curtidas>

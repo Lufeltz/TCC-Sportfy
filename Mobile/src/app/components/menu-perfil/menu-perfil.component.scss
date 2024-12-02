@@ -1,0 +1,120 @@
+.toolbar-tabs {
+  --background: var(--background-dark);
+  border-left: 2px solid var(--light-blue);
+  border-top-left-radius: 30px;
+}
+
+.toolbar-menu {
+  --background: var(--background-dark);
+}
+
+ion-menu {
+  --background: var(--background-dark);
+}
+
+ion-content {
+  --background: var(--background-dark);
+  border-left: 2px solid var(--light-blue);
+}
+
+.menu-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: var(--background-dark);
+}
+
+.menu-item {
+  background: var(--background-dark);
+  color: var(--gray-50);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.menu-item:hover ion-label {
+  color: var(--light-blue);
+}
+
+.menu-item .item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--background-dark);
+}
+
+.i-tem {
+  font-size: 1.5rem;
+  color: var(--light-blue);
+  background-color: var(--background-dark);
+}
+
+.metas {
+  font-size: 1.5rem;
+  color: var(--purple-desc);
+}
+
+.metas-esportivas {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sublist {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+  gap: 10px;
+  background-color: var(--background-dark);
+}
+
+.sublist ion-label:hover {
+  color: var(--yellow-desc);
+}
+
+ion-title {
+  text-align: center;
+  width: 100%;
+  margin-left: 25px;
+}
+
+.logout {
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: var(--background-dark);
+}
+
+.logout ion-label:hover {
+  color: var(--light-red);
+}
+
+.item .stars {
+  display: flex;
+  gap: 5px;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.rating-info-inline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: -15px;
+}
+
+.rating-info-inline ion-label {
+  color: var(--yellow-desc);
+}
+
+ion-title {
+  color: var(--light-blue);
+}
+
+ion-menu-button {
+  color: var(--light-blue);
+}

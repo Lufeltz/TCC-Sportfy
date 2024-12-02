@@ -1,0 +1,56 @@
+<div class="modal-background" (click)="closeModal()"></div>
+<div class="modal-content">
+  <div class="meta-details">
+    <h3 class="centralizado texto-verde">
+      {{ time.nome }}
+    </h3>
+    <p class="centralizado text-light">Inscrever-se no time?</p>
+
+    <ul>
+      <li
+        class="item-lista2"
+        *ngIf="campeonato?.privacidadeCampeonato === 'PRIVADO'"
+      >
+        <div class="icon-align">
+          <lucide-angular
+            [img]="CaseUpper"
+            class="btn-inscrever-se"
+            [size]="20"
+            [color]="'var(--yellow-desc)'"
+          ></lucide-angular>
+          <ion-label>Senha</ion-label>
+        </div>
+        <ion-input
+          [(ngModel)]="time.senhaCampeonato"
+          placeholder="*****"
+          class="styled-input"
+          type="password"
+        ></ion-input>
+      </li>
+    </ul>
+  </div>
+
+  <div class="button-group">
+    <ion-button size="small" expand="block" (click)="closeModal()">
+      <lucide-angular
+        [img]="CircleX"
+        class="btn-inscrever-se"
+        [size]="20"
+      ></lucide-angular>
+      <div class="text-container">Fechar</div>
+    </ion-button>
+
+    <ion-button
+      size="small"
+      expand="block"
+      (click)="adicionarUsuario(idUsuario, time)"
+    >
+      <lucide-angular
+        [img]="Save"
+        class="btn-inscrever-se"
+        [size]="20"
+      ></lucide-angular>
+      <div class="text-container">Confirmar</div>
+    </ion-button>
+  </div>
+</div>

@@ -1,0 +1,571 @@
+<ion-content class="ion-padding">
+  <app-menu-perfil
+    [title]="pageTitle"
+    [menu]="pageMenu"
+    [menuContentId]="pageContent"
+  ></app-menu-perfil>
+
+  <ion-segment [(ngModel)]="selectedSegment">
+    <ion-segment-button value="criacao">
+      <ion-label>Criação</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="listagem-campeonatos">
+      <ion-label>Listagem</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="historico-campeonatos">
+      <ion-label>Histórico</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="selectedSegment === 'criacao'">
+    <div class="container">
+      <ul>
+        <!-- Título -->
+        <li class="item-lista">
+          <div class="icon-align">
+            <lucide-angular
+              [img]="ALargeSmall"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label>Título</ion-label>
+          </div>
+          <ion-textarea
+            ngDefaultControl
+            [(ngModel)]="campeonato.titulo"
+            placeholder="Exemplo: Fut no SEPT(máx 50 caracteres)"
+            auto-grow="true"
+            required
+            #titulo="ngModel"
+          ></ion-textarea>
+          <ion-text color="danger" *ngIf="titulo?.invalid && titulo?.touched">
+            <p>O campo título é obrigatório.</p>
+          </ion-text>
+        </li>
+
+        <!-- Descrição -->
+        <li class="item-lista">
+          <div class="icon-align">
+            <lucide-angular
+              [img]="NotebookText"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label>Descrição</ion-label>
+          </div>
+          <ion-textarea
+            ngDefaultControl
+            [(ngModel)]="campeonato.descricao"
+            placeholder="Exemplo: Na quadra ao lado do SEPT, levem caneleiras"
+            auto-grow="true"
+            required
+            #descricao="ngModel"
+          ></ion-textarea>
+          <ion-text
+            color="danger"
+            *ngIf="descricao?.invalid && descricao?.touched"
+          >
+            <p>O campo descrição é obrigatório.</p>
+          </ion-text>
+        </li>
+
+        <!-- Aposta -->
+        <li class="item-lista">
+          <div class="icon-align">
+            <lucide-angular
+              [img]="CircleDollarSign"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label>Aposta</ion-label>
+          </div>
+          <ion-textarea
+            ngDefaultControl
+            [(ngModel)]="campeonato.aposta"
+            placeholder="Exemplo: R$10"
+            auto-grow="true"
+            required
+            #aposta="ngModel"
+          ></ion-textarea>
+          <ion-text color="danger" *ngIf="aposta?.invalid && aposta?.touched">
+            <p>O campo aposta é obrigatório.</p>
+          </ion-text>
+        </li>
+
+        <!-- Modalidade -->
+        <li class="item-lista">
+          <div class="icon-align">
+            <lucide-angular
+              [img]="Volleyball"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label>Modalidade</ion-label>
+          </div>
+          <div class="input-space">
+            <div class="custom-select-wrapper">
+              <select
+                class="custom-select"
+                id="modalidade-select"
+                [(ngModel)]="campeonato.idModalidadeEsportiva"
+                (change)="onSelectChange($event)"
+                required
+                #modalidade="ngModel"
+              >
+                <!-- <option [ngValue]="null" selected>Sem Modalidade</option> -->
+                <option value="1" selected>Futebol</option>
+                <option value="2">Vôlei</option>
+                <option value="3">Basquete</option>
+                <option value="4">Tênis de Mesa</option>
+              </select>
+            </div>
+          </div>
+          <ion-text
+            color="danger"
+            *ngIf="modalidade?.invalid && modalidade?.touched"
+          >
+            <p>O campo modalidade é obrigatório.</p>
+          </ion-text>
+        </li>
+
+        <!-- Limite de Times -->
+        <li class="item-lista">
+          <div class="icon-align">
+            <lucide-angular
+              [img]="Users"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label>Limite de Times</ion-label>
+          </div>
+          <ion-input
+            ngDefaultControl
+            [(ngModel)]="campeonato.limiteTimes"
+            placeholder="Exemplo: 15"
+            maxlength="2"
+            type="text"
+            (ionInput)="validateLimiteTimes($event)"
+            required
+            #limiteTimes="ngModel"
+          ></ion-input>
+          <ion-text
+            color="danger"
+            *ngIf="limiteTimes?.invalid && limiteTimes?.touched"
+          >
+            <p>O campo limite de times é obrigatório.</p>
+          </ion-text>
+        </li>
+
+        <!-- Limite de Participantes -->
+        <li class="item-lista">
+          <div class="icon-align">
+            <lucide-angular
+              [img]="User"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label>Limite de Participantes</ion-label>
+          </div>
+          <ion-input
+            ngDefaultControl
+            [(ngModel)]="campeonato.limiteParticipantes"
+            placeholder="Exemplo: 20"
+            maxlength="2"
+            type="text"
+            (ionInput)="validateNumber($event)"
+            required
+            #limiteParticipantes="ngModel"
+          ></ion-input>
+          <ion-text
+            color="danger"
+            *ngIf="limiteParticipantes?.invalid && limiteParticipantes?.touched"
+          >
+            <p>O campo limite de participantes é obrigatório.</p>
+          </ion-text>
+        </li>
+
+        <!-- Data e Hora de Início -->
+        <li class="item-lista">
+          <div
+            class="input-data-hora-container"
+            style="display: flex; gap: 10px"
+          >
+            <div style="flex: 8">
+              <div class="icon-align">
+                <lucide-angular
+                  [img]="CalendarArrowUp"
+                  class="btn-inscrever-se"
+                  [size]="20"
+                  [color]="'var(--yellow-desc)'"
+                ></lucide-angular>
+                <label for="inicio" class="input-label">Data de Início</label>
+              </div>
+              <input
+                type="date"
+                id="inicio"
+                name="inicio"
+                required
+                [(ngModel)]="dataInicio"
+                class="styled-input"
+                #dataInicioField="ngModel"
+              />
+              <ion-text
+                color="danger"
+                *ngIf="dataInicioField?.invalid && dataInicioField?.touched"
+              >
+                <p>O campo data de início é obrigatório.</p>
+              </ion-text>
+            </div>
+            <div style="flex: 2">
+              <div class="icon-align">
+                <lucide-angular
+                  [img]="AlarmClock"
+                  class="btn-inscrever-se"
+                  [size]="20"
+                  [color]="'var(--yellow-desc)'"
+                ></lucide-angular>
+                <label for="hora-inicio" class="input-label">Hora</label>
+              </div>
+              <input
+                type="time"
+                id="hora-inicio"
+                name="hora-inicio"
+                required
+                [(ngModel)]="horaInicio"
+                class="styled-input"
+                #horaInicioField="ngModel"
+              />
+              <ion-text
+                color="danger"
+                *ngIf="horaInicioField?.invalid && horaInicioField?.touched"
+              >
+                <p>O campo hora de início é obrigatório.</p>
+              </ion-text>
+            </div>
+          </div>
+        </li>
+
+        <!-- Data e Hora de Término -->
+        <li class="item-lista">
+          <div
+            class="input-data-hora-container"
+            style="display: flex; gap: 10px"
+          >
+            <div style="flex: 8">
+              <div class="icon-align">
+                <lucide-angular
+                  [img]="CalendarCheck"
+                  class="btn-inscrever-se"
+                  [size]="20"
+                  [color]="'var(--yellow-desc)'"
+                ></lucide-angular>
+                <label for="fim" class="input-label">Data de Término</label>
+              </div>
+              <input
+                type="date"
+                id="fim"
+                name="fim"
+                required
+                [(ngModel)]="dataFim"
+                class="styled-input"
+                #dataFimField="ngModel"
+              />
+              <ion-text
+                color="danger"
+                *ngIf="dataFimField?.invalid && dataFimField?.touched"
+              >
+                <p>O campo data de término é obrigatório.</p>
+              </ion-text>
+            </div>
+            <div style="flex: 2">
+              <div class="icon-align">
+                <lucide-angular
+                  [img]="AlarmClock"
+                  class="btn-inscrever-se"
+                  [size]="20"
+                  [color]="'var(--yellow-desc)'"
+                ></lucide-angular>
+                <label for="hora-fim" class="input-label">Hora</label>
+              </div>
+              <input
+                type="time"
+                id="hora-fim"
+                name="hora-fim"
+                required
+                [(ngModel)]="horaFim"
+                class="styled-input"
+                #horaFimField="ngModel"
+              />
+              <ion-text
+                color="danger"
+                *ngIf="horaFimField?.invalid && horaFimField?.touched"
+              >
+                <p>O campo hora de término é obrigatório.</p>
+              </ion-text>
+            </div>
+          </div>
+        </li>
+
+        <li class="item-lista">
+          <div class="icon-align">
+            <lucide-angular
+              [img]="EyeOff"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label class="input-label">Privacidade do Campeonato</ion-label>
+          </div>
+          <ion-radio-group
+            [(ngModel)]="campeonato.privacidadeCampeonato"
+            [allowEmptySelection]="false"
+          >
+            <div class="items">
+              <ion-item lines="none" class="radio-item item-up">
+                <div class="align-it">
+                  <ion-radio
+                    slot="start"
+                    value="PUBLICO"
+                    class="styled-radio"
+                  ></ion-radio>
+                  <ion-label
+                    (click)="campeonato.privacidadeCampeonato = 'PUBLICO'"
+                    >Público</ion-label
+                  >
+                </div>
+              </ion-item>
+              <ion-item lines="none" class="radio-item item-bottom">
+                <div class="align-it">
+                  <ion-radio
+                    slot="start"
+                    value="PRIVADO"
+                    class="styled-radio"
+                  ></ion-radio>
+                  <ion-label
+                    (click)="campeonato.privacidadeCampeonato = 'PRIVADO'"
+                    >Privado</ion-label
+                  >
+                </div>
+              </ion-item>
+            </div>
+          </ion-radio-group>
+        </li>
+
+        <!-- Exibir o campo senha apenas se o valor de privacidadeCampeonato for "PRIVADO" -->
+        <li
+          class="item-lista"
+          *ngIf="campeonato.privacidadeCampeonato === 'PRIVADO'"
+        >
+          <div class="icon-align">
+            <lucide-angular
+              [img]="Key"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label>Senha</ion-label>
+          </div>
+          <ion-input
+            ngDefaultControl
+            [(ngModel)]="campeonato.senha"
+            placeholder="Exemplo: azx2817"
+          ></ion-input>
+        </li>
+
+        <li class="item-lista">
+          <div class="input-container">
+            <!-- Linha 1: ícone e label do CEP -->
+            <div class="cep-header">
+              <lucide-angular
+                [img]="MapPinned"
+                class="btn-inscrever-se"
+                [size]="20"
+                [color]="'var(--yellow-desc)'"
+              ></lucide-angular>
+              <ion-label class="input-label">CEP</ion-label>
+            </div>
+
+            <!-- Linha 2: campo de entrada e botão -->
+            <div class="cep-footer">
+              <ion-input
+                ngDefaultControl
+                [(ngModel)]="campeonato.endereco.cep"
+                placeholder="Exemplo: 81280-000"
+                (input)="validarCep()"
+                maxlength="8"
+                type="tel"
+              ></ion-input>
+              <ion-button
+                (click)="pesquisarCep(campeonato.endereco.cep)"
+                [disabled]="!isCepValid"
+                fill="outline"
+                class="cep-button"
+              >
+                <lucide-angular
+                  [img]="Search"
+                  class="btn-inscrever-se"
+                  [size]="20"
+                  [color]="'var(--background-dark)'"
+                ></lucide-angular>
+              </ion-button>
+            </div>
+          </div>
+        </li>
+
+        <li class="item-lista">
+          <div class="icon-align">
+            <lucide-angular
+              [img]="MapPinHouse"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label>Logradouro</ion-label>
+          </div>
+          <ion-textarea
+            ngDefaultControl
+            [(ngModel)]="campeonato.endereco.rua"
+            placeholder="Logradouro"
+            auto-grow="true"
+          ></ion-textarea>
+        </li>
+
+        <li class="item-lista">
+          <div class="icon-align">
+            <lucide-angular
+              [img]="MapPinHouse"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label>Número</ion-label>
+          </div>
+          <ion-input
+            ngDefaultControl
+            placeholder="Número"
+            [(ngModel)]="campeonato.endereco.numero"
+            type="text"
+            maxlength="5"
+            (ionInput)="validateNumber2($event)"
+          ></ion-input>
+        </li>
+
+        <li class="item-lista">
+          <div
+            class="input-cidade-uf-container"
+            style="display: flex; gap: 10px"
+          >
+            <div style="flex: 8">
+              <div class="icon-align">
+                <lucide-angular
+                  [img]="MapPinHouse"
+                  class="btn-inscrever-se"
+                  [size]="20"
+                  [color]="'var(--yellow-desc)'"
+                ></lucide-angular>
+                <ion-label>Cidade</ion-label>
+              </div>
+              <ion-input
+                ngDefaultControl
+                [(ngModel)]="campeonato.endereco.cidade"
+                placeholder="Cidade"
+                class="input-cidade"
+              ></ion-input>
+            </div>
+            <div style="flex: 2">
+              <div class="icon-align">
+                <lucide-angular
+                  [img]="MapPinHouse"
+                  class="btn-inscrever-se"
+                  [size]="20"
+                  [color]="'var(--yellow-desc)'"
+                ></lucide-angular>
+                <ion-label>UF</ion-label>
+              </div>
+              <ion-input
+                ngDefaultControl
+                [(ngModel)]="campeonato.endereco.uf"
+                placeholder="UF"
+                class="input-uf"
+              ></ion-input>
+            </div>
+          </div>
+        </li>
+
+        <li class="item-lista">
+          <div class="icon-align">
+            <lucide-angular
+              [img]="MapPinHouse"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label>Bairro</ion-label>
+          </div>
+          <ion-input
+            ngDefaultControl
+            [(ngModel)]="campeonato.endereco.bairro"
+            placeholder="Bairro"
+          ></ion-input>
+        </li>
+
+        <li class="item-lista">
+          <div class="icon-align">
+            <lucide-angular
+              [img]="MapPinHouse"
+              class="btn-inscrever-se"
+              [size]="20"
+              [color]="'var(--yellow-desc)'"
+            ></lucide-angular>
+            <ion-label>Complemento</ion-label>
+          </div>
+          <ion-textarea
+            ngDefaultControl
+            [(ngModel)]="campeonato.endereco.complemento"
+            placeholder="Exemplo: Próximo da quadra de corrida"
+            auto-grow="true"
+          ></ion-textarea>
+        </li>
+      </ul>
+      <ion-button
+        id="open-toast"
+        expand="small"
+        class="centered-button"
+        (click)="salvarDados()"
+        [disabled]="!horaFim"
+      >
+        <div class="icon-align">
+          <lucide-angular
+            [img]="Pencil"
+            class="btn-inscrever-se"
+            [size]="20"
+            [color]="'var(--background-dark)'"
+          ></lucide-angular>
+          <p style="color: var(--background-dark)">Criar</p>
+        </div>
+      </ion-button>
+
+      <ion-toast
+        position="top"
+        trigger="open-toast"
+        message="Campeonato criado com sucesso!"
+        position="bottom"
+        [duration]="2000"
+      ></ion-toast>
+    </div>
+  </div>
+
+  <div *ngIf="selectedSegment === 'listagem-campeonatos'">
+    <app-listagem-campeonatos></app-listagem-campeonatos>
+  </div>
+
+  <div *ngIf="selectedSegment === 'historico-campeonatos'">
+    <app-historico-campeonatos></app-historico-campeonatos>
+  </div>
+</ion-content>

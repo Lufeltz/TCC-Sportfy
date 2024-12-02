@@ -1,0 +1,192 @@
+<ion-content [fullscreen]="true">
+  <form #formLogin="ngForm">
+    <div class="container">
+      <h1>Sportfy</h1>
+      <p>Faça seu cadastro abaixo.</p>
+      <ion-list lines="none">
+        <div class="icon-align">
+          <lucide-angular
+            [img]="User"
+            class="btn-inscrever-se"
+            [size]="20"
+            [color]="'var(--yellow-desc)'"
+          ></lucide-angular>
+          <ion-label>Nome</ion-label>
+        </div>
+        <ion-item>
+          <ion-input
+            type="text"
+            name="nome"
+            id="nome"
+            placeholder="Exemplo: Carlos Roberto"
+            [(ngModel)]="academico.nome"
+            #nome="ngModel"
+            required
+          ></ion-input>
+        </ion-item>
+        <div *ngIf="nome.invalid && nome.touched" class="error-message">
+          <p *ngIf="nome.errors?.['required']">O nome é obrigatório.</p>
+        </div>
+
+        <div class="icon-align">
+          <lucide-angular
+            [img]="ALargeSmall"
+            class="btn-inscrever-se"
+            [size]="20"
+            [color]="'var(--yellow-desc)'"
+          ></lucide-angular>
+          <ion-label>Usuário</ion-label>
+        </div>
+        <ion-item>
+          <ion-input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Exemplo: carlos_ro"
+            [(ngModel)]="academico.username"
+            #username="ngModel"
+            required
+          ></ion-input>
+        </ion-item>
+        <div *ngIf="username.invalid && username.touched" class="error-message">
+          <p *ngIf="username.errors?.['required']">O usuário é obrigatório.</p>
+        </div>
+
+        <div class="icon-align">
+          <lucide-angular
+            [img]="AtSign"
+            class="btn-inscrever-se"
+            [size]="20"
+            [color]="'var(--yellow-desc)'"
+          ></lucide-angular>
+          <ion-label>E-mail</ion-label>
+        </div>
+        <ion-item>
+          <ion-input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Exemplo: carlos.roberto@ufpr.br"
+            [(ngModel)]="academico.email"
+            #email="ngModel"
+            required
+            email
+          ></ion-input>
+        </ion-item>
+        <div *ngIf="email.invalid && email.touched" class="error-message">
+          <p *ngIf="email.errors?.['required']">O e-mail é obrigatório.</p>
+          <p *ngIf="email.errors?.['email']">O e-mail deve ser válido.</p>
+        </div>
+
+        <div class="icon-align">
+          <lucide-angular
+            [img]="Phone"
+            class="btn-inscrever-se"
+            [size]="20"
+            [color]="'var(--yellow-desc)'"
+          ></lucide-angular>
+          <ion-label>Telefone</ion-label>
+        </div>
+        <ion-item>
+          <ion-input
+            type="tel"
+            name="telefone"
+            id="telefone"
+            placeholder="Exemplo: (41) 9 9214-4435"
+            [(ngModel)]="academico.telefone"
+            (input)="onTelefoneChange($event)"
+            #telefone="ngModel"
+            required
+            maxlength="11"
+            pattern="[0-9]{11}"
+          ></ion-input>
+        </ion-item>
+        <div *ngIf="telefone.invalid && telefone.touched" class="error-message">
+          <p *ngIf="telefone.errors?.['required']">O telefone é obrigatório.</p>
+          <p *ngIf="telefone.errors?.['pattern']">
+            O telefone deve conter apenas números e 11 dígitos.
+          </p>
+        </div>
+
+        <div class="icon-align">
+          <lucide-angular
+            [img]="CalendarArrowUp"
+            class="btn-inscrever-se"
+            [size]="20"
+            [color]="'var(--yellow-desc)'"
+          ></lucide-angular>
+          <ion-label>Data de Nascimento</ion-label>
+        </div>
+        <ion-item>
+          <ion-input
+            type="date"
+            id="dataNascimento"
+            name="dataNascimento"
+            [(ngModel)]="academico.dataNascimento"
+            #dataNascimento="ngModel"
+            class="styled-input"
+            required
+          ></ion-input>
+        </ion-item>
+        <div
+          *ngIf="dataNascimento.invalid && dataNascimento.touched"
+          class="error-message"
+        >
+          <p *ngIf="dataNascimento.errors?.['required']">
+            A data de nascimento é obrigatória.
+          </p>
+        </div>
+
+        <div class="icon-align">
+          <lucide-angular
+            [img]="GraduationCap"
+            class="btn-inscrever-se"
+            [size]="20"
+            [color]="'var(--yellow-desc)'"
+          ></lucide-angular>
+          <ion-label>Curso</ion-label>
+        </div>
+        <ion-item id="curso item-lista">
+          <div class="input-space">
+            <div *ngIf="cursos.length > 0">
+              <select
+                class="custom-select"
+                id="modalidade-select"
+                [(ngModel)]="academico!.curso"
+                name="curso"
+                #curso="ngModel"
+                required
+              >
+                <option value="" disabled selected>Selecione o curso</option>
+                <option *ngFor="let curso of cursos" [value]="curso">
+                  {{ curso }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
+
+      <ion-button
+        size="small"
+        expand="block"
+        (click)="cadastrar()"
+        class="icon-button"
+        [disabled]="!formLogin.valid"
+      >
+        <div class="text-container">Registrar</div>
+        <div class="icon-align2">
+          <lucide-angular
+            [img]="SaveAll"
+            class="btn-inscrever-se"
+            [size]="20"
+          ></lucide-angular>
+        </div>
+      </ion-button>
+
+      <p class="margin-bot">
+        Já possui uma conta? <a routerLink="/login">Log in</a>
+      </p>
+    </div>
+  </form>
+</ion-content>
