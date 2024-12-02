@@ -1,0 +1,198 @@
+{
+  "academicos": [
+    {
+      "idAcademico": 1,
+      "nome": "Thiago dos Santos",
+      "username": "thiago1",
+      "telefone": "123456789",
+      "dataNascimento": "1990-05-10",
+      "email": "thiago1@ufpr.br",
+      "foto": "https://www.github.com/IamThiago-IT.png"
+    },
+    {
+      "idAcademico": 2,
+      "nome": "Luiz Admin",
+      "username": "LuizAdmin",
+      "telefone": "987654321",
+      "dataNascimento": "1988-09-15",
+      "email": "luiz@ufpr.br",
+      "foto": "https://via.placeholder.com/150"
+    }
+  ],
+  "administradores": [
+    {
+      "idAdministrador": 1,
+      "usuario": {
+        "idAcademico": 1,
+        "username": "thiago1",
+        "nome": "Thiago dos Santos",
+        "telefone": "123456789",
+        "dataNascimento": "1990-05-10",
+        "foto": "https://www.github.com/IamThiago-IT.png"
+      }
+    },
+    {
+      "idAdministrador": 2,
+      "usuario": {
+        "idAcademico": 2,
+        "username": "LuizAdmin",
+        "nome": "Luiz Admin",
+        "telefone": "987654321",
+        "dataNascimento": "1988-09-15",
+        "foto": "https://via.placeholder.com/150"
+      }
+    }
+  ],
+  "apoiosSaude": [
+    {
+      "idApoioSaude": 1,
+      "nome": "Clínica Saúde Bem",
+      "email": "contato@clinicasaudebem.com",
+      "telefone": "987654321",
+      "descricao": "Oferecemos apoio psicológico e nutricional.",
+      "dataPublicacao": "2024-09-20T10:00:00Z",
+      "administrador": {
+        "idAdministrador": 1,
+        "usuario": {
+          "idAcademico": 1,
+          "username": "thiago1",
+          "nome": "Thiago dos Santos",
+          "telefone": "123456789",
+          "dataNascimento": "1990-05-10",
+          "foto": "https://www.github.com/IamThiago-IT.png"
+        }
+      }
+    }
+  ],
+  "campeonatos": [
+    {
+      "idCampeonato": 1,
+      "codigo": "CAM2024",
+      "titulo": "Campeonato de Futebol",
+      "descricao": "Campeonato regional de futebol.",
+      "aposta": "R$ 10,00",
+      "dataCriacao": "2024-09-20T10:00:00Z",
+      "dataInicio": "2024-10-01T10:00:00Z",
+      "dataFim": "2024-11-30T10:00:00Z",
+      "limiteTimes": 16,
+      "limiteParticipantes": 100,
+      "ativo": true,
+      "endereco": {
+        "idEndereco": 1,
+        "rua": "Avenida Principal",
+        "numero": "123",
+        "cidade": "Cidade Exemplo",
+        "estado": "Estado Exemplo",
+        "cep": "12345-678"
+      },
+      "privacidadeCampeonato": "PUBLICO",
+      "academico": {
+        "idAcademico": 1,
+        "nome": "Thiago dos Santos",
+        "telefone": "123456789",
+        "dataNascimento": "1990-05-10",
+        "foto": "https://www.github.com/IamThiago-IT.png"
+      },
+      "modalidadeEsportiva": {
+        "idModalidadeEsportiva": 1,
+        "nome": "Futebol"
+      },
+      "situacaoCampeonato": "EM_ANDAMENTO",
+      "partidas": [
+        {
+          "idPartida": 1,
+          "dataPartida": "2024-10-05T10:00:00Z",
+          "local": "Estádio Municipal"
+        }
+      ]
+    }
+  ],
+  "canais": [
+    {
+      "idCanal": 1,
+      "tipoCanal": "CANAL_PUBLICO",
+      "listaUsuarioCanal": [
+        {
+          "idUsuarioCanal": 1,
+          "usuario": {
+            "idAcademico": 1,
+            "username": "thiago1"
+          }
+        }
+      ],
+      "listaPublicacao": [
+        {
+          "idPublicacao": 1,
+          "titulo": "Publicação 1",
+          "conteudo": "Conteúdo da publicação 1"
+        }
+      ]
+    }
+  ],
+  "comentarios": [
+    {
+      "idComentario": 1,
+      "descricao": "Ótimo campeonato!",
+      "dataComentario": "2024-09-20T10:00:00Z",
+      "publicacao": {
+        "idPublicacao": 1,
+        "titulo": "Publicação 1"
+      },
+      "usuario": {
+        "idAcademico": 1,
+        "username": "thiago1"
+      },
+      "listaCurtidaComentario": [
+        {
+          "idCurtidaComentario": 1,
+          "usuario": {
+            "idAcademico": 1,
+            "username": "thiago1"
+          }
+        }
+      ]
+    }
+  ],
+  "conquistas": [
+    {
+      "idConquista": 1,
+      "dataConquista": "2024-09-20T10:00:00Z",
+      "academico": {
+        "idAcademico": 1,
+        "nome": "Thiago dos Santos",
+        "telefone": "123456789",
+        "dataNascimento": "1990-05-10",
+        "foto": "https://www.github.com/IamThiago-IT.png"
+      },
+      "metaEsportiva": {
+        "idMetaEsportiva": 1,
+        "descricao": "Completar 10 treinos de natação em um mês",
+        "dataMeta": "2024-10-01"
+      }
+    }
+  ],
+  "notificacoes": [
+    {
+      "idNotificacao": 1,
+      "titulo": "Nova Atualização",
+      "mensagem": "O campeonato começará em breve.",
+      "dataNotificacao": "2024-09-20T10:00:00Z",
+      "academico": {
+        "idAcademico": 1,
+        "nome": "Thiago dos Santos"
+      }
+    }
+  ],
+  "privacidades": [
+    {
+      "idPrivacidade": 1,
+      "nivelPrivacidade": "PUBLICO"
+    }
+  ],
+  "times": [
+    {
+      "idTime": 1,
+      "nome": "Time A"
+    }
+  ]
+}
