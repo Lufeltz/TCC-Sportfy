@@ -11,14 +11,13 @@ Neste repositório contém o código fonte para a entrega do projeto para a disc
 
 ### Pre-requisitos:
 - Ter Ionic instalado (para executar o aplicativo)
-- Ter NextJs instalado (para executar a aplicação web)
 - Ter Java configurado na máquina
 - Ter Java Spring Boot configurado na máquina
 - Ter MySQL configurado na máquina
 - Ter NodeJS configurado na máquina
 - Faça o clone o repositório e acesse o seu conteúdo raiz
-- Instalar todas as dependências necessárias usando npm install após acessar cada diretório
 - Ter a IDE Visual Studio Code ou IntelliJ
+- Instalar todas as dependências necessárias usando npm install após acessar cada diretório
 
 1. Acesse o diretório Frontend e execute a aplicação web através do comando: ppm run dev
 2. Acesse o diretório Mobile e execute o aplicativo mobile através do comando: ionic serve
